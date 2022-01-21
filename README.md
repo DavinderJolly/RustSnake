@@ -4,7 +4,7 @@
 
 ### Requirements
 
-- cargo
+- Rust Installation
 
 ### Build from source
 
