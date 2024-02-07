@@ -4,6 +4,7 @@ use graphics::glyph_cache::rusttype::GlyphCache;
 use graphics::Transformed;
 use opengl_graphics::{GlGraphics, TextureSettings};
 use piston::input::{Button, Key, RenderArgs};
+
 pub struct Game {
     pub gl: GlGraphics,
     pub snake: Snake,
@@ -27,8 +28,10 @@ impl Game {
 
     pub fn render_score(&mut self, args: &RenderArgs) {
         const WHITE: [f32; 4] = [1.0, 1.0, 1.0, 1.0];
+        let font_bytes = include_bytes!("../assets/FiraSans-Regular.ttf"); // your file bytes
+
         let mut glyph_cache =
-            GlyphCache::new("assets/FiraSans-Regular.ttf", (), TextureSettings::new()).unwrap();
+            GlyphCache::from_bytes(font_bytes, (), TextureSettings::new()).unwrap();
         self.gl.draw(args.viewport(), |c, g| {
             graphics::Text::new_color(WHITE, 24)
                 .draw(
